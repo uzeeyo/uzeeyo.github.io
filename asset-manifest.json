@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4386d973.css",
+    "main.js": "/static/js/main.a31d41ba.js",
+    "static/js/787.7da95b79.chunk.js": "/static/js/787.7da95b79.chunk.js",
+    "static/media/Robtronika.ttf": "/static/media/Robtronika.3a5bff6562eea11669e5.ttf",
+    "index.html": "/index.html",
+    "main.4386d973.css.map": "/static/css/main.4386d973.css.map",
+    "main.a31d41ba.js.map": "/static/js/main.a31d41ba.js.map",
+    "787.7da95b79.chunk.js.map": "/static/js/787.7da95b79.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4386d973.css",
+    "static/js/main.a31d41ba.js"
+  ]
+}
