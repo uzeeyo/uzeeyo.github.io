@@ -38,12 +38,16 @@ export default function Navbar() {
           <img
             className="w-8 h-8 cursor-pointer"
             src="/icons/github-mark-white.svg"
+            onClick={() => window.open("https://github.com/uzeeyo")}
           />
           <img
             className="w-8 h-8 cursor-pointer"
             src="/icons/linkedin-white.svg"
+            onClick={() => window.open("https://www.linkedin.com/in/jminott/")}
           />
-          <img className="w-8 h-8 cursor-pointer" src="/icons/email.svg" />
+          <a href="mailto:jordan@minott.dev">
+            <img className="w-8 h-8 cursor-pointer" src="/icons/email.svg" />
+          </a>
         </div>
       </div>
     </nav>
