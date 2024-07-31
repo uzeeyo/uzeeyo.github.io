@@ -3,52 +3,53 @@ import "./App.css";
 import Dialog from "./Components/Dialog";
 import TechIcon from "./Components/TechIcon";
 import Navbar from "./Components/Navbar";
+import Project from "./Components/Project";
+import { ProjectData } from "./Components/Project";
 
-export interface ProjectData {
-  name: string;
-  description: string;
-  images: string[];
-  locked: boolean;
-  link?: string;
-}
+const projects: ProjectData[] = [
+  {
+    name: "XeroByte",
+    simpleName: "xerobyte",
+    shortDescription: "Multiplayer strategy card game.",
+    description: `XeroByte is a strategy card game. Players take turns making choices to outplay their opponent and ultimately destroy their core. The game is built in Unity with a server-authoritative architecture. \n\nAll in-game assets are custom made by myself. 
+      The game is currently in development.`,
+    images: ["/images/yog-capsule.png", "/images/yog-ss1.png"],
+    locked: true,
+    tech: [
+      "c-sharp",
+      "unity",
+      "golang",
+      "postgres",
+      "docker",
+      "substanceDesigner",
+      "substancePainter",
+    ],
+    videos: ["/videos/yog-p.mp4"],
+  },
 
-const projects: Map<string, ProjectData> = new Map([
-  [
-    "Yog",
-    {
-      name: "Yog",
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.`,
-      images: ["/images/yog.png", "/images/precision.png", "/images/yog.png"],
-      locked: true,
-    },
-  ],
-  [
-    "Precision",
-    {
-      name: "Precision Desktop",
-      description: "Order management system for repair oriented businesses.",
-      images: ["/images/precision.png"],
-      locked: false,
-      link: "https://github.com/uzeeyo/Precision",
-    },
-  ],
-  [
-    "oof",
-    {
-      name: "oof!",
-      description: "Anonymous social media platform.",
-      images: ["/images/oof.png"],
-      locked: false,
-      link: "https://github.com/uzeeyo/oof",
-    },
-  ],
-]);
+  {
+    name: "Precision Desktop",
+    simpleName: "precision",
+    shortDescription: "Order management system.",
+    description:
+      "An order management system for repair oriented businesses allowing users to manage orders, customers, and inventory. It was coded in C#, designed with WPF, and runs on a javascript backend using a Postgres database.",
+    images: ["/images/precision.png"],
+    locked: false,
+    link: "https://github.com/uzeeyo/Precision",
+    tech: ["c-sharp", "javascript", "typescript", "postgres"],
+  },
+  {
+    name: "oof!",
+    simpleName: "oof",
+    shortDescription: "Anonymous social media platform.",
+    description:
+      "oof! allows users to post anonymously and interact with other users' posts. The platform is built with Next.js and uses a Postgres database. The frontend is styled with Tailwind CSS.",
+    images: ["/images/oof.png"],
+    locked: false,
+    link: "https://github.com/uzeeyo/oof",
+    tech: ["javascript", "typescript", "nextjs", "postgres", "tailwind"],
+  },
+];
 
 function App() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -62,7 +63,7 @@ function App() {
   return (
     <div className="flex flex-col max-w-full">
       <Dialog
-        project={projects.get(activeProjectName)!}
+        project={projects.find((x) => x.simpleName == activeProjectName)!}
         open={dialogOpen}
         setOpen={setDialogOpen}
       />
@@ -361,79 +362,15 @@ function App() {
           >
             <p className="text-3xl lg:text-5xl text-center ">Projects</p>
             <div className="divider my-10 lg:my-14" />
-            <div className="grid grid-rows-3 grid-cols-1 lg:grid-rows-1 lg:grid-cols-5 gap-y-6 lg:gap-4 px-5">
-              <a
-                id="Yog"
-                className="lg:col-start-2 project cursor-pointer"
-                onClick={onProjectClicked}
-              >
-                <div className="relative ">
-                  <div className="absolute hover:backdrop-blur-sm hover:bg-[rgba(0,0,0,0.6)] z-10 w-full h-full transition-all text-transparent hover:text-white flex flex-col items-center justify-center">
-                    <h3 className="text-2xl font-bold">Yog</h3>
-                    <p className="text-center  w-2/3">
-                      Multiplayer strategy card game.
-                    </p>
-                    <div className="project-description">
-                      <img className="h-8 w-8" src="/logos/c-sharp.svg" />
-                      <img className="h-8 w-8" src="/logos/unity.svg" />
-                      <img className="h-8 w-8" src="/logos/blender.svg" />
-                      <img className="h-8 w-8" src="/logos/postgres.svg" />
-                      <img
-                        className="h-8 w-8"
-                        src="/logos/substancePainter.svg"
-                      />
-                      <img
-                        className="h-8 w-8"
-                        src="/logos/substanceDesigner.svg"
-                      />
-                    </div>
-                  </div>
-                  <img src="/images/yog.png" />
-                </div>
-              </a>
-              <a
-                id="Precision"
-                className="project cursor-pointer"
-                onClick={onProjectClicked}
-              >
-                <div className="relative ">
-                  <div className="absolute hover:backdrop-blur-sm hover:bg-[rgba(0,0,0,0.6)] z-10 w-full h-full transition-all text-transparent hover:text-white flex flex-col items-center justify-center">
-                    <h3 className="text-2xl font-bold">Precision Desktop</h3>
-                    <p className="text-center w-2/3">
-                      Order management system for repair oriented businesses.
-                    </p>
-                    <div className="project-description">
-                      <img className="h-8 w-8" src="/logos/c-sharp.svg" />
-                      <img className="h-8 w-8" src="/logos/wpf.png" />
-                      <img className="h-8 w-8" src="/logos/javascript.svg" />
-                      <img className="h-8 w-8" src="/logos/typescript.svg" />
-                      <img className="h-8 w-8" src="/logos/postgres.svg" />
-                    </div>
-                  </div>
-                  <img src="/images/precision.png" />
-                </div>
-              </a>
-              <a
-                id="oof"
-                className="project cursor-pointer"
-                onClick={onProjectClicked}
-              >
-                <div className="relative project">
-                  <div className="absolute hover:backdrop-blur-sm hover:bg-[rgba(0,0,0,0.6)] z-10 w-full h-full transition-all text-transparent hover:text-white flex flex-col items-center justify-center">
-                    <h3 className="text-2xl font-bold">oof!</h3>
-                    <p className="text-center w-2/3">
-                      Anonymous social media platform.
-                    </p>
-                    <div className="project-description">
-                      <img className="h-8 w-8" src="/logos/javascript.svg" />
-                      <img className="h-8 w-8" src="/logos/typescript.svg" />
-                      <img className="h-8 w-8" src="/logos/nextjs.svg" />
-                      <img className="h-8 w-8" src="/logos/postgres.svg" />
-                    </div>
-                  </div>
-                  <img src="/images/oof.png" />
-                </div>
-              </a>
+            <div className="grid grid-rows-3 grid-cols-1 lg:grid-rows-1 lg:grid-cols-3 gap-y-6 lg:gap-4 px-5">
+              {Array.from(projects.values()).map((project) => {
+                return (
+                  <Project
+                    project={project}
+                    projectClicked={onProjectClicked}
+                  />
+                );
+              })}
             </div>
           </div>
 
@@ -447,15 +384,6 @@ function App() {
             <div className="flex flex-wrap gap-10 lg:max-w-[60rem] mb-10 px-6 justify-center">
               <TechIcon name="Unity" imageUri="/logos/unity.svg" />
               <TechIcon name="React" imageUri="/logos/react.svg" />
-              <TechIcon name="Blender" imageUri="/logos/blender.svg" />
-              <TechIcon
-                name="Substance Designer"
-                imageUri="/logos/substanceDesigner.svg"
-              />
-              <TechIcon
-                name="Substance Painter"
-                imageUri="/logos/substancePainter.svg"
-              />
               <TechIcon name="Git" imageUri="/logos/git.svg" />
               <TechIcon name="WPF" imageUri="/logos/wpf.png" />
               <TechIcon name="Docker" imageUri="/logos/docker.svg" />
@@ -470,10 +398,10 @@ function App() {
             <div className="divider my-10 lg:my-14" />
             <div className="flex flex-wrap gap-10 max-w-[60rem] justify-center">
               <TechIcon name="C#" imageUri="/logos/c-sharp.svg" />
-              <TechIcon name="Postgres" imageUri="/logos/postgres.svg" />
+              <TechIcon name="SQL" imageUri="/logos/postgres.svg" />
+              <TechIcon name="Go" imageUri="/logos/golang.svg" />
               <TechIcon name="Javascript" imageUri="/logos/javascript.svg" />
               <TechIcon name="Typescript" imageUri="/logos/typescript.svg" />
-              <TechIcon name="Go" imageUri="/logos/golang.svg" />
             </div>
           </div>
         </div>

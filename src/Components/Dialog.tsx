@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ProjectData } from "../App";
+import { ProjectData } from "./Project";
 import Project from "./Project";
 
 interface Props {
@@ -9,9 +9,10 @@ interface Props {
 }
 
 const Dialog = (props: Props) => {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   const close = () => {
+    setActiveImageIndex(null);
     props.setOpen(false);
   };
 
@@ -31,16 +32,33 @@ const Dialog = (props: Props) => {
             className="fixed w-full h-full backdrop-blur-md bg-zinc-950 bg-opacity-70 -z-10"
             onClick={close}
           ></div>
-          <div
-            id="test"
-            className=" bg-zinc-700 rounded-lg p-6 lg:p-8 flex flex-col items-center max-w-[90%] max-h-[80%] lg:max-w-[50%]"
-          >
+          <div className=" bg-zinc-700 rounded-lg p-6 lg:p-8 flex flex-col items-center max-w-[90%] max-h-[80%] lg:max-w-[50%]">
             <h1 className="text-4xl">{props.project.name}</h1>
             <div className="divider my-5 min-h-1 min-w-full"></div>
             <div className="flex flex-col lg:flex-row overflow-auto">
               <div className="flex flex-col">
-                <img src={props.project.images[activeImageIndex]}></img>
+                {props.project.videos != null && activeImageIndex == null ? (
+                  <video
+                    src={props.project.videos[0]}
+                    className="w-[35rem]"
+                    autoPlay={true}
+                  ></video>
+                ) : (
+                  <img
+                    src={props.project.images[activeImageIndex || 0]}
+                    className="w-[35rem]"
+                  ></img>
+                )}
+
                 <div className="flex flex-row flex-wrap my-5 gap-4 justify-center">
+                  {props.project.videos && (
+                    <img
+                      id="99"
+                      className="h-12 lg:h-20"
+                      src="/images/playvideo.png"
+                      onClick={onImageClicked}
+                    ></img>
+                  )}
                   {props.project.images.map((uri, index) => {
                     return (
                       <img
