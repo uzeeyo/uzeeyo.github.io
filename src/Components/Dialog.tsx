@@ -9,10 +9,11 @@ interface Props {
 }
 
 const Dialog = (props: Props) => {
-  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
 
   const close = () => {
-    setActiveImageIndex(null);
+    setActiveImageIndex(0);
     props.setOpen(false);
   };
 
@@ -22,6 +23,23 @@ const Dialog = (props: Props) => {
 
   const onImageClicked = (event: React.MouseEvent<HTMLImageElement>) => {
     setActiveImageIndex(parseInt(event.currentTarget.id));
+  };
+
+  const onVideoLoaded = (event: React.SyntheticEvent<HTMLVideoElement>) => {
+    setVideoLoaded(true);
+  };
+
+  const getYoutubeEmbed = (url: string): JSX.Element => {
+    return (
+      <iframe
+        className="w-[35rem] h-[20rem]"
+        src={url}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+    );
   };
 
   return (
@@ -37,23 +55,24 @@ const Dialog = (props: Props) => {
             <div className="divider my-5 min-h-1 min-w-full"></div>
             <div className="flex flex-col lg:flex-row overflow-auto">
               <div className="flex flex-col">
-                {props.project.videos != null && activeImageIndex == null ? (
-                  <video
-                    src={props.project.videos[0]}
-                    className="w-[35rem]"
-                    autoPlay={true}
-                  ></video>
+                {props.project.video != null && activeImageIndex == 0 ? (
+                  getYoutubeEmbed(props.project.video)
                 ) : (
                   <img
-                    src={props.project.images[activeImageIndex || 0]}
+                    src={
+                      props.project.video != null && activeImageIndex > 0
+                        ? props.project.images[activeImageIndex - 1]
+                        : props.project.images[activeImageIndex]
+                    }
                     className="w-[35rem]"
-                  ></img>
+                    alt="Project image"
+                  />
                 )}
 
                 <div className="flex flex-row flex-wrap my-5 gap-4 justify-center">
-                  {props.project.videos && (
+                  {props.project.video && (
                     <img
-                      id="99"
+                      id="0"
                       className="h-12 lg:h-20"
                       src="/images/playvideo.png"
                       onClick={onImageClicked}
@@ -62,7 +81,11 @@ const Dialog = (props: Props) => {
                   {props.project.images.map((uri, index) => {
                     return (
                       <img
-                        id={index.toString()}
+                        id={
+                          props.project.video != null
+                            ? (index + 1).toString()
+                            : index.toString()
+                        }
                         className="h-12 lg:h-20"
                         src={uri}
                         onClick={onImageClicked}

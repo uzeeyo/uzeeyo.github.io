@@ -4,8 +4,8 @@
 
 @layer base {
   @font-face {
-    font-family: "Robotronika";
-    src: url("/public/fonts/Robtronika.ttf") format("truetype");
+    font-family: "Toxigenesis";
+    src: url("/public/fonts/Toxigenesis.otf") format("opentype");
   }
 }
 

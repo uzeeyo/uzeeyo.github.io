@@ -8,10 +8,10 @@ import { ProjectData } from "./Components/Project";
 
 const projects: ProjectData[] = [
   {
-    name: "XeroByte",
-    simpleName: "xerobyte",
+    name: "Xalos",
+    simpleName: "xalos",
     shortDescription: "Multiplayer strategy card game.",
-    description: `XeroByte is a strategy card game. Players take turns making choices to outplay their opponent and ultimately destroy their core. The game is built in Unity with a server-authoritative architecture. \n\nAll in-game assets are custom made by myself. 
+    description: `Xalos is a strategy card game. Players take turns making choices to outplay their opponent and ultimately destroy their core. The game is built in Unity with a server-authoritative architecture. \n\nAll in-game assets are custom made by myself. 
       The game is currently in development.`,
     images: ["/images/yog-capsule.png", "/images/yog-ss1.png"],
     locked: true,
@@ -24,7 +24,7 @@ const projects: ProjectData[] = [
       "substanceDesigner",
       "substancePainter",
     ],
-    videos: ["/videos/yog-p.mp4"],
+    video: "https://www.youtube.com/embed/oqlVbSciORU?si=cwen_UP_jXaahOIG",
   },
 
   {
@@ -332,15 +332,15 @@ function App() {
           {/* Text */}
           <div className="flex flex-col px-10 lg:px-20 lg:bg-[rgba(0,0,0,0.8)] justify-center lg:backdrop-blur-sm lg:pt-20 pb-10 lg:max-w-[35rem]">
             <h3 className="text-[1.5rem] lg:text-[1.5rem]">Hey! I'm</h3>
-            <h1 className="text-[2rem] lg:text-[3rem] my-2 font-bold leading-none font-robotronika">
+            <h1 className="text-[2rem] lg:text-[3rem] my-2 font-bold leading-none font-toxigenesis">
               JORDAN MINOTT
             </h1>
             <div className="text-[1.5rem] lg:text-[2rem] text-aqua font-bold leading-none">
               A FULL-STACK DEVELOPER
             </div>
             <p className="text-lg max-w-[45rem] mt-6">
-              Software is my passion. I've been building a wide range of
-              applications over the last 6 years.
+              I believe nothing is out of my reach. With hard work and
+              dedication we can accomplish anything we want.
             </p>
           </div>
 

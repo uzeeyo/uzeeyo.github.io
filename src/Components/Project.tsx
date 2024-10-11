@@ -9,7 +9,7 @@ export interface ProjectData {
   locked: boolean;
   link?: string;
   tech: string[];
-  videos?: string[];
+  video?: string;
 }
 
 interface ProjectProps {

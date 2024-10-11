@@ -9,8 +9,8 @@ module.exports = {
         disabled: "#a3a3a3",
       },
       fontFamily: {
-        robotronika: ["Robotronika", "sans-serif"],
-      }
+        toxigenesis: ["Toxigenesis", "sans-serif"],
+      },
     },
   },
   plugins: [],
