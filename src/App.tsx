@@ -24,6 +24,8 @@ const projects: ProjectData[] = [
       "substanceDesigner",
       "substancePainter",
     ],
+    steamLink:
+      "https://store.steampowered.com/app/3204750/?utm_source=portfolio",
     video: "https://www.youtube.com/embed/oqlVbSciORU?si=cwen_UP_jXaahOIG",
   },
 
@@ -35,7 +37,7 @@ const projects: ProjectData[] = [
       "An order management system for repair oriented businesses allowing users to manage orders, customers, and inventory. It was coded in C#, designed with WPF, and runs on a javascript backend using a Postgres database.",
     images: ["/images/precision.png"],
     locked: false,
-    link: "https://github.com/uzeeyo/Precision",
+    gitLink: "https://github.com/uzeeyo/Precision",
     tech: ["c-sharp", "javascript", "typescript", "postgres"],
   },
   {
@@ -46,7 +48,7 @@ const projects: ProjectData[] = [
       "oof! allows users to post anonymously and interact with other users' posts. The platform is built with Next.js and uses a Postgres database. The frontend is styled with Tailwind CSS.",
     images: ["/images/oof.png"],
     locked: false,
-    link: "https://github.com/uzeeyo/oof",
+    gitLink: "https://github.com/uzeeyo/oof",
     tech: ["javascript", "typescript", "nextjs", "postgres", "tailwind"],
   },
 ];

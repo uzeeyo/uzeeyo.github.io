@@ -654,20 +654,12 @@ video {
   height: 2rem;
 }
 
-.h-\[42rem\] {
-  height: 42rem;
+.h-\[20rem\] {
+  height: 20rem;
 }
 
 .h-full {
   height: 100%;
-}
-
-.h-\[30rem\] {
-  height: 30rem;
-}
-
-.h-\[20rem\] {
-  height: 20rem;
 }
 
 .max-h-\[80\%\] {

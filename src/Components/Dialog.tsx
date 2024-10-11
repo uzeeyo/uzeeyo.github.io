@@ -18,7 +18,11 @@ const Dialog = (props: Props) => {
   };
 
   const onGithubLinkClicked = () => {
-    window.open(props.project.link, "_blank");
+    window.open(props.project.gitLink, "_blank");
+  };
+
+  const onSteamLinkClicked = () => {
+    window.open(props.project.steamLink, "_blank");
   };
 
   const onImageClicked = (event: React.MouseEvent<HTMLImageElement>) => {
@@ -98,21 +102,31 @@ const Dialog = (props: Props) => {
                 <p className=" lg:max-w-[20rem]">{props.project.description}</p>
               </div>
             </div>
-            <button
-              className={
-                `rounded-lg py-1 px-3 mx-auto flex items-center mt-4 border-2 ` +
-                (props.project.locked
-                  ? "text-disabled cursor-not-allowed border-disabled"
-                  : "text-aqua border-aqua hover:bg-aqua hover:text-white")
-              }
-              disabled={props.project.locked}
-              onClick={onGithubLinkClicked}
-            >
-              {props.project.locked && (
-                <img className="h-6 mr-2" src="/icons/lock.svg" />
+            <div className="flex flex-row gap-4">
+              {props.project.steamLink && (
+                <button
+                  className="rounded-lg py-1 px-3 mx-auto flex items-center mt-4 border-2"
+                  onClick={onSteamLinkClicked}
+                >
+                  <span className="text-lg">View on Steam</span>
+                </button>
               )}
-              <span className="text-lg">View on Github</span>
-            </button>
+              <button
+                className={
+                  `rounded-lg py-1 px-3 mx-auto flex items-center mt-4 border-2 ` +
+                  (props.project.locked
+                    ? "text-disabled cursor-not-allowed border-disabled"
+                    : "text-aqua border-aqua hover:bg-aqua hover:text-white")
+                }
+                disabled={props.project.locked}
+                onClick={onGithubLinkClicked}
+              >
+                {props.project.locked && (
+                  <img className="h-6 mr-2" src="/icons/lock.svg" />
+                )}
+                <span className="text-lg">View on Github</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
