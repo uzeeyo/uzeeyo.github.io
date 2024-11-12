@@ -10,7 +10,6 @@ interface Props {
 
 const Dialog = (props: Props) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
 
   const close = () => {
     setActiveImageIndex(0);
@@ -25,24 +24,26 @@ const Dialog = (props: Props) => {
     window.open(props.project.steamLink, "_blank");
   };
 
+  const onLinkClicked = () => {
+    window.open(props.project.link, "_blank");
+  };
+
   const onImageClicked = (event: React.MouseEvent<HTMLImageElement>) => {
     setActiveImageIndex(parseInt(event.currentTarget.id));
   };
 
-  const onVideoLoaded = (event: React.SyntheticEvent<HTMLVideoElement>) => {
-    setVideoLoaded(true);
-  };
-
   const getYoutubeEmbed = (url: string): JSX.Element => {
     return (
-      <iframe
-        className="w-[35rem] h-[20rem]"
-        src={url}
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
+      <div className="w-full aspect-video">
+        <iframe
+          className="w-full h-full"
+          src={url}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      </div>
     );
   };
 
@@ -54,11 +55,12 @@ const Dialog = (props: Props) => {
             className="fixed w-full h-full backdrop-blur-md bg-zinc-950 bg-opacity-70 -z-10"
             onClick={close}
           ></div>
-          <div className=" bg-zinc-700 rounded-lg p-6 lg:p-8 flex flex-col items-center max-w-[90%] max-h-[80%] lg:max-w-[50%]">
+
+          <div className="bg-zinc-700 rounded-lg p-6 lg:p-8 flex flex-col items-center max-w-[90%] max-h-[80%] lg:max-w-[50%]">
             <h1 className="text-4xl">{props.project.name}</h1>
             <div className="divider my-5 min-h-1 min-w-full"></div>
-            <div className="flex flex-col lg:flex-row overflow-auto">
-              <div className="flex flex-col">
+            <div className="flex flex-col lg:flex-row overflow-auto custom-scrollbar">
+              <div className="flex flex-col min-w-0">
                 {props.project.video != null && activeImageIndex == 0 ? (
                   getYoutubeEmbed(props.project.video)
                 ) : (
@@ -68,7 +70,7 @@ const Dialog = (props: Props) => {
                         ? props.project.images[activeImageIndex - 1]
                         : props.project.images[activeImageIndex]
                     }
-                    className="w-[35rem]"
+                    className="max-w-full w-[35rem] h-auto object-contain"
                     alt="Project image"
                   />
                 )}
@@ -77,52 +79,64 @@ const Dialog = (props: Props) => {
                   {props.project.video && (
                     <img
                       id="0"
-                      className="h-12 lg:h-20"
+                      className="h-12 lg:h-[4rem] cursor-pointer hover:opacity-80 transition-opacity"
                       src="/images/playvideo.png"
                       onClick={onImageClicked}
-                    ></img>
+                      alt="Play video"
+                    />
                   )}
-                  {props.project.images.map((uri, index) => {
-                    return (
-                      <img
-                        id={
-                          props.project.video != null
-                            ? (index + 1).toString()
-                            : index.toString()
-                        }
-                        className="h-12 lg:h-20"
-                        src={uri}
-                        onClick={onImageClicked}
-                      ></img>
-                    );
-                  })}
+                  {props.project.images.map((uri, index) => (
+                    <img
+                      key={index}
+                      id={
+                        props.project.video != null
+                          ? (index + 1).toString()
+                          : index.toString()
+                      }
+                      className="h-12 lg:h-16 cursor-pointer hover:opacity-80 transition-opacity"
+                      src={uri}
+                      onClick={onImageClicked}
+                      alt={`Preview ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
-              <div className="lg:mx-10 lg:mt-4 overflow-auto">
-                <p className=" lg:max-w-[20rem]">{props.project.description}</p>
+              <div className="lg:ml-8 overflow-y-auto custom-scrollbar">
+                <p className="max-w-[20rem]">{props.project.description}</p>
               </div>
             </div>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 mt-4">
               {props.project.steamLink && (
                 <button
-                  className="rounded-lg py-1 px-3 mx-auto flex items-center mt-4 border-2"
+                  className="rounded-lg py-1 px-3 mx-auto flex items-center border-2"
                   onClick={onSteamLinkClicked}
                 >
                   <span className="text-lg">View on Steam</span>
                 </button>
               )}
+              {props.project.link && (
+                <button
+                  className="rounded-lg py-1 px-3 mx-auto flex items-center border-2"
+                  onClick={onLinkClicked}
+                >
+                  View
+                </button>
+              )}
               <button
-                className={
-                  `rounded-lg py-1 px-3 mx-auto flex items-center mt-4 border-2 ` +
-                  (props.project.locked
+                className={`rounded-lg py-1 px-3 mx-auto flex items-center border-2 ${
+                  props.project.locked
                     ? "text-disabled cursor-not-allowed border-disabled"
-                    : "text-aqua border-aqua hover:bg-aqua hover:text-white")
-                }
+                    : "text-aqua border-aqua hover:bg-aqua hover:text-white"
+                }`}
                 disabled={props.project.locked}
                 onClick={onGithubLinkClicked}
               >
                 {props.project.locked && (
-                  <img className="h-6 mr-2" src="/icons/lock.svg" />
+                  <img
+                    className="h-6 mr-2"
+                    src="/icons/lock.svg"
+                    alt="Locked"
+                  />
                 )}
                 <span className="text-lg">View on Github</span>
               </button>

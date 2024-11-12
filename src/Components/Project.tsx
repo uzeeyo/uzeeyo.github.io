@@ -7,6 +7,7 @@ export interface ProjectData {
   shortDescription: string;
   images: string[];
   locked: boolean;
+  link?: string;
   gitLink?: string;
   steamLink?: string;
   tech: string[];
