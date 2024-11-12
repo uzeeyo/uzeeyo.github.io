@@ -30,6 +30,22 @@ const projects: ProjectData[] = [
   },
 
   {
+    name: "Pixellizer",
+    simpleName: "pixellizer",
+    shortDescription: "Pixel art converter",
+    description:
+      "Pixellizer is a tool that converts high-resolution images into pixel art. By selecting a target resolution (e.g., 64x64), Pixellizer divides the original image into blocks, averages the color of each block, and matches it to the closest color in a palette using Euclidean distance. The resulting pixel art is displayed on a canvas to download.",
+    images: [
+      "/images/pixellizer.png",
+      "images/pixellizer-2.png",
+      "images/pixellizer-3.png",
+    ],
+    locked: false,
+    gitLink: "https://github.com/uzeeyo/pixellizer",
+    link: "https://minott.dev/pixellizer/",
+    tech: ["typescript", "tailwind"],
+  },
+  {
     name: "Precision Desktop",
     simpleName: "precision",
     shortDescription: "Order management system.",
@@ -364,7 +380,7 @@ function App() {
           >
             <p className="text-3xl lg:text-5xl text-center ">Projects</p>
             <div className="divider my-10 lg:my-14" />
-            <div className="grid grid-rows-3 grid-cols-1 lg:grid-rows-1 lg:grid-cols-3 gap-y-6 lg:gap-4 px-5">
+            <div className="flex flex-wrap justify-center gap-y-6 lg:gap-4 px-5">
               {Array.from(projects.values()).map((project) => {
                 return (
                   <Project
